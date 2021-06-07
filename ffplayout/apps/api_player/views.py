@@ -131,7 +131,7 @@ class Config(APIView):
 
 class SystemCtl(APIView):
     """
-    controlling the ffplayout-engine over systemd services,
+    controlling the ffplayout_engine over systemd services,
     or over a socket connecting
     """
 

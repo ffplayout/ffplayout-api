@@ -146,7 +146,7 @@ def sizeof_fmt(num, suffix='B'):
 
 class EngineControlSystemD:
     """
-    class for controlling the systemd service from ffplayout-engine
+    class for controlling the systemd service from ffplayout_engine
     """
 
     def __init__(self):
