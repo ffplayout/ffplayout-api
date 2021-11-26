@@ -55,6 +55,9 @@ def start_stream(last):
 
 
 def check_streams(data):
+    """
+    check which stream are running and depending on that kick one
+    """
     if data['stream'] == settings.HIGH_PRIORITY_STREAM:
         kick_streams()
     elif data['stream'] == settings.LOW_PRIORITY_STREAM:
@@ -68,6 +71,9 @@ def check_streams(data):
 
 
 def rtmp_key(req):
+    """
+    get all keys/values from rtmp address
+    """
     param = req['param'].lstrip('?')
     params = param.split('&')
     obj = {}
