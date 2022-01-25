@@ -83,15 +83,15 @@ def write_json(data, channel):
     return Response({'detail': f'Saving playlist from {data["date"]} failed!'})
 
 
-def read_log(type_, date_, channel):
+def read_log(date_, channel):
     config = read_yaml(channel)
     if config and config.get('logging'):
         log_path = config['logging']['log_path']
 
         if date_ == datetime.now().strftime('%Y-%m-%d'):
-            log_file = os.path.join(log_path, '{}.log'.format(type_))
+            log_file = os.path.join(log_path, 'ffplayout.log')
         else:
-            log_file = os.path.join(log_path, '{}.log.{}'.format(type_, date_))
+            log_file = os.path.join(log_path, f'ffplayout.log.{date_}')
 
         if os.path.isfile(log_file):
             with open(log_file, 'r') as log:
