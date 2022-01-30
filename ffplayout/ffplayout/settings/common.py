@@ -147,7 +147,7 @@ REQUEST_TIMEOUT = 1000
 ###############################################################################
 # controlling of the engine over supervisord xmlrpclib
 # MULTI_CHANNEL False switch to systemd
-MULTI_CHANNEL = True
+MULTI_CHANNEL = False
 SOCKET_IP = 'localhost'
 SOCKET_PORT = 9001
 SOCKET_USER = 'ffplayout'
@@ -159,11 +159,11 @@ SRS_IP = '127.0.0.1'
 SRS_API_PORT = 1985
 
 # srs rtmp server API key
-SRS_KEY = 'fdO12mlKgp0H4z3sG8ybc5Du9wQFi77vN'
+SRS_KEY = 'aVwaih7jfRHdKzu8WtHB'
 
 # rtmp authentication
-RTMP_KEY = 'fdO12mlKgp0H4z3sG8ybc5Du9wQFi77vN'
+RTMP_KEY = 'aVwaih7jfRHdKzu8WtHB'
 # set which rtmp stream have highest priority (low priority get kicked out)
 # stream is the last part of the rtmp address: rtmp://example.org/live/[stream]
 HIGH_PRIORITY_STREAM = 'event'
-LOW_PRIORITY_STREAM = 'tv'
+LOW_PRIORITY_STREAM = 'stream'
