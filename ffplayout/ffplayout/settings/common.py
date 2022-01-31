@@ -14,7 +14,6 @@ import os
 from datetime import timedelta
 from importlib import import_module
 from pathlib import Path
-from pydoc import locate
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(
@@ -109,8 +108,6 @@ LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
-
-USE_L10N = True
 
 USE_TZ = True
 

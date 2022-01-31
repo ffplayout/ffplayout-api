@@ -2,4 +2,5 @@ from django.apps import AppConfig
 
 
 class ApiPlayerConfig(AppConfig):
-    name = 'api_player'
+    default_auto_field = 'django.db.models.BigAutoField'
+    name = 'apps.api_player'
