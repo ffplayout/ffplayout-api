@@ -1,6 +1,7 @@
 import json
 import os
 import re
+from pathlib import Path
 from datetime import datetime
 from platform import uname
 from subprocess import PIPE, STDOUT, run
@@ -27,7 +28,7 @@ def read_yaml(channel):
     config = gui_config(channel)
 
     if config.get('playout_config') and \
-            os.path.isfile(config['playout_config']):
+            Path(config['playout_config']).is_file():
         with open(config['playout_config'], 'r') as config_file:
             return yaml.safe_load(config_file)
 
@@ -47,11 +48,16 @@ def read_json(date_, channel):
     config = read_yaml(channel)
 
     if config:
-        playlist_path = config['playlist']['path']
-        year, month, _ = date_.split('-')
-        input_ = os.path.join(playlist_path, year, month, f'{date_}.json')
+        playlist_path = Path(config['playlist']['path'])
 
-        if os.path.isfile(input_):
+        if playlist_path.is_file():
+            with open(playlist_path, 'r') as playlist:
+                return json.load(playlist)
+
+        year, month, _ = date_.split('-')
+        input_ = playlist_path.joinpath(year, month, f'{date_}.json')
+
+        if input_.is_file():
             with open(input_, 'r') as playlist:
                 return json.load(playlist)
 
@@ -62,20 +68,25 @@ def write_json(data, channel):
     config = read_yaml(channel)
 
     if config:
-        playlist_path = config['playlist']['path']
-        year, month, _ = data['date'].split('-')
-        playlist = os.path.join(playlist_path, year, month)
+        path_ = Path(config['playlist']['path'])
 
-        if not os.path.isdir(playlist):
-            os.makedirs(playlist, exist_ok=True)
+        if path_.suffix and path_.suffix.lower() == '.json':
+            if not path_.parent.is_dir():
+                path_.parent.mkdir(parents=True)
+        else:
+            year, month, _ = data['date'].split('-')
+            path_ = path_.joinpath(year, month)
 
-        output = os.path.join(playlist, f'{data["date"]}.json')
+            if not path_.is_dir():
+                path_.mkdir(parents=True)
 
-        if os.path.isfile(output) and data == read_json(data['date'], channel):
+            path_ = path_.joinpath(f'{data["date"]}.json')
+
+        if path_.is_file() and data == read_json(data['date'], channel):
             return Response(
                 {'detail': f'Playlist from {data["date"]} already exists'})
 
-        with open(output, "w") as outfile:
+        with open(path_, 'w') as outfile:
             json.dump(data, outfile, indent=4)
 
         return Response({'detail': f'Playlist from {data["date"]} saved'})
@@ -86,14 +97,14 @@ def write_json(data, channel):
 def read_log(date_, channel):
     config = read_yaml(channel)
     if config and config.get('logging'):
-        log_path = config['logging']['log_path']
+        log_path = Path(config['logging']['log_path'])
 
         if date_ == datetime.now().strftime('%Y-%m-%d'):
-            log_file = os.path.join(log_path, 'ffplayout.log')
+            log_file = log_path.joinpath('ffplayout.log')
         else:
-            log_file = os.path.join(log_path, f'ffplayout.log.{date_}')
+            log_file = log_path.joinpath(f'ffplayout.log.{date_}')
 
-        if os.path.isfile(log_file):
+        if log_file.is_file():
             with open(log_file, 'r') as log:
                 return log.read().strip()
 
