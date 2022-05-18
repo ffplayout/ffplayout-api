@@ -61,11 +61,12 @@ class GuiSettingsViewSet(viewsets.ModelViewSet):
             engine.stop()
             count = 0
 
-            while engine.status().lower() != 'stopped' and count < 10:
+            while engine.status() and engine.status().lower() != 'stopped' \
+                    and count < 10:
                 sleep(0.5)
                 count += 1
 
-            if engine.status().lower() == 'stopped':
+            if engine.status() and engine.status().lower() == 'stopped':
                 engine.remove_process(service_name)
 
         return super(
