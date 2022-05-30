@@ -149,18 +149,3 @@ SOCKET_IP = 'localhost'
 SOCKET_PORT = 9001
 SOCKET_USER = 'ffplayout'
 SOCKET_PASS = 'hsF0wQkl5zopEy1mBlT3g'
-
-###############################################################################
-# srs streaming server
-SRS_IP = '127.0.0.1'
-SRS_API_PORT = 1985
-
-# srs rtmp server API key
-SRS_KEY = 'aVwaih7jfRHdKzu8WtHB'
-
-# rtmp authentication
-RTMP_KEY = 'aVwaih7jfRHdKzu8WtHB'
-# set which rtmp stream have highest priority (low priority get kicked out)
-# stream is the last part of the rtmp address: rtmp://example.org/live/[stream]
-HIGH_PRIORITY_STREAM = 'event'
-LOW_PRIORITY_STREAM = 'stream'
