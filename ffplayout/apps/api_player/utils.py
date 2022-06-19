@@ -157,11 +157,11 @@ def sizeof_fmt(num, suffix='B'):
 
 class EngineControlSystemD:
     """
-    class for controlling the systemd service from ffplayout_engine
+    class for controlling the systemd service from ffplayout-engine
     """
 
     def __init__(self):
-        self.service = ['ffplayout_engine.service']
+        self.service = ['ffplayout-engine.service']
         self.cmd = ['sudo', '/bin/systemctl']
         self.proc = None
 
