@@ -194,7 +194,7 @@ class EngineControlSystemD:
 
 class EngineControlSocket:
     """
-    class for controlling ffplayout_engine over supervisord socket
+    class for controlling ffplayout-engine over supervisord socket
     """
 
     def __init__(self):
@@ -252,7 +252,7 @@ class EngineControlSocket:
 
 class SystemControl:
     """
-    controlling the ffplayout_engine over systemd services,
+    controlling the ffplayout-engine over systemd services,
     or over a socket connecting
     """
 
